@@ -5,14 +5,14 @@
     <nav class='header-navigation'>
         <a 
             class='header-navigation-link' 
-            data-current="<?php echo ($path==='/thing/hello') ? "true" : "false"?>" 
+            <?php echo ($path==='/thing/hello') ? "data-current" : "" ?> 
             href="/thing/hello"
         >
             hello
         </a>
         <a 
             class='header-navigation-link' 
-            data-current="<?php echo ($path==='/thing/world') ? "true" : "false"?>" 
+            <?php echo ($path==='/thing/world') ? "data-current" : "" ?> 
             href="/thing/world"
         >
             world
