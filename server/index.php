@@ -2,10 +2,6 @@
     // init
 
     session_start();
-
-    // define globals
-
-    require __DIR__.'/routes.php'
 ?>
 
 <head>

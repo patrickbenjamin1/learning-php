@@ -1,7 +1,9 @@
 <header class='header'>
-    <div class='header-logo'>logo</div>
+    <a href='/'>
+        <div class='header-logo'>logo</div>
+    </a>
     <nav class='header-navigation'>
-        <a href="<?php echo $routes->thing->path ?>">thing</a>
-        <a href="<?php echo $routes->thing->path ?>">thing</a>
+        <a href="/thing/hello">hello</a>
+        <a href="/thing/world">world</a>
     </nav>
 </header>
