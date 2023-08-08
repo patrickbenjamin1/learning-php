@@ -2,6 +2,11 @@
     // init
 
     session_start();
+
+    // define globals
+    
+    global $path;
+    $path = $_SERVER['REQUEST_URI'];
 ?>
 
 <head>

@@ -1,9 +1,21 @@
 <header class='header'>
-    <a href='/'>
-        <div class='header-logo'>logo</div>
+    <a class='header-logo' href='/'>
+        patrick's cool php website
     </a>
     <nav class='header-navigation'>
-        <a href="/thing/hello">hello</a>
-        <a href="/thing/world">world</a>
+        <a 
+            class='header-navigation-link' 
+            data-current="<?php echo ($path==='/thing/hello') ? "true" : "false"?>" 
+            href="/thing/hello"
+        >
+            hello
+        </a>
+        <a 
+            class='header-navigation-link' 
+            data-current="<?php echo ($path==='/thing/world') ? "true" : "false"?>" 
+            href="/thing/world"
+        >
+            world
+        </a>
     </nav>
 </header>
