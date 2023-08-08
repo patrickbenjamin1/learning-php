@@ -1,0 +1,4 @@
+a, a:visited, a:link, a:focus {
+    color: inherit;
+    text-decoration: inherit;
+}

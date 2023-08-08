@@ -1,0 +1,13 @@
+html {
+    --header-height: 40px;
+
+    --spacing-small: 0.5rem;
+    --spacing-medium: 2rem;
+    --spacing-large: 4rem;
+
+    --grey-light: #d1d1d1;
+    --grey-medium: #848484;
+    --grey-dark: #373737;
+
+    --accent: blue;
+}

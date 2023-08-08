@@ -1,0 +1,23 @@
+header {
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: var(--header-height);
+    padding: var(--spacing-small);
+    background: var(--grey-light);
+
+    & .header-navigation {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-small);
+
+        & .header-navigation-link {
+            font-weight: bold;
+
+            &[data-current]{
+                color: var(--accent);
+            }
+        }
+    }
+}
