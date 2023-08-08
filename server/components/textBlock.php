@@ -1,3 +1,3 @@
 <div class='card'>
-    <?php echo $thing ?>
+    <?php echo $thing->name ?>
 </div>

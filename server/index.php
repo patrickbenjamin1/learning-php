@@ -1,5 +1,19 @@
+<?php
+    // init
+
+    session_start();
+
+    // define globals
+
+    require __DIR__.'/routes.php'
+?>
+
 <head>
     <?php require __DIR__.'/metadata.php' ?>
+
+    <style>
+        <?php include __DIR__.'/styles.css' ?>
+    </style>
 </head>
 
 <body>    

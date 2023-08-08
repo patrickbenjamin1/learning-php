@@ -2,19 +2,18 @@
 
 $path = $_SERVER['REQUEST_URI'];
 
-switch ($path) {
-    case '':
-    case '/':
-        include __DIR__.'/views/index.php';
-        break;
+$matchedPath = false;
 
-    case '/thing':
-        include __DIR__.'/views/thing.php';
-        break;
-
-    default:
-        http_response_code(404);
-        include __DIR__.'/views/404.php';
-        break;
+foreach($routes as $routeKey => $routeValue) {
+    if ($routeValue->path === $path){
+        $matchedPath = true;
+        include $routeValue->viewPath;
+    }
 }
+
+if ($matchedPath === false){
+    http_response_code(404);
+    include __DIR__.'/views/404.php';
+}
+
 ?>
