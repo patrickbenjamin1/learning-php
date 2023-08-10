@@ -1,11 +1,9 @@
 <?php
     // get thing name from path
 
-    $matches;
+    $params = matchParams('/thing/[name]', $path);
 
-    preg_match('/^\/thing\/(\w+)$/', $path, $matches);
-
-    $name = $matches[1];
+    $name=$params['name'] ?? null;
 ?>
 
 <main>
