@@ -1,3 +1,4 @@
 footer {
     padding: var(--spacing-small);
+    margin-top: var(--spacing-large);
 }

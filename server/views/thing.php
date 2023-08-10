@@ -1,11 +1,19 @@
 <?php
-    // get thing name from path
+    // get thing id from path
 
     $params = matchParams($routes['thing']['template'], $path);
 
-    $name=$params['name'] ?? null;
+    $id = $params['id'] ?? null;
+
+    $thing = getThingById($id);
+
+    if (!$thing){
+        include __DIR__.'/404.php';
+    } else {
 ?>
 
 <main>
-    <h1>thing <?php echo $name ?></h1>
+    <h1><?php echo $thing->name ?></h1>
 </main>
+
+<?php }

@@ -6,8 +6,12 @@ $routes = [
         "route" => "/",
         "template" => "/"
     ],
+    "things" => [
+        "route" => "/things",
+        "template" => "/things"
+    ],
     "thing" => [
-        "route" => function($name) { return "/thing/".$name; },
-        "template" => "/thing/[name]"
+        "route" => function($id) { return "/things/".urlencode($id); },
+        "template" => "/things/[id]"
     ]
 ];

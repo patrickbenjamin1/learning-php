@@ -5,17 +5,10 @@
     <nav class='header-navigation'>
         <a 
             class='header-navigation-link' 
-            <?php echo ($path===$routes['thing']['route']('hello')) ? "data-current" : "" ?> 
-            href="<?php echo $routes['thing']['route']('hello') ?>"
+            <?php echo ($path===$routes['things']['route']) ? "data-current" : "" ?> 
+            href="<?php echo $routes['things']['route'] ?>"
         >
-            hello
-        </a>
-        <a 
-            class='header-navigation-link' 
-            <?php echo ($path===$routes['thing']['route']('world')) ? "data-current" : "" ?> 
-            href="<?php echo $routes['thing']['route']('world') ?>"
-        >
-            world
+            things
         </a>
     </nav>
 </header>

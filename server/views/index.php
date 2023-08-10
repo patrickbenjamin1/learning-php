@@ -1,25 +1,23 @@
 <main>
     <h1>home</h1>
 
-    <?php
-        class Thing {
-            public $name;
-        }
+    <div class='things'>
+        <?php
+            $topThings = array_slice($things, 0, 3);
 
-        $thing1 = new Thing();
-        $thing1->name = 'hello';
-
-        $thing2 = new Thing();
-        $thing2->name = 'world';
-
-        $things = [$thing1, $thing2];
-    ?>
-
-    <?php
-        if (count($things)){
-            foreach($things as $thing){
-                include __DIR__.'/../components/textBlock.php';
+            if (count($topThings)){
+                foreach($topThings as $thing){
+                    include __DIR__.'/../components/thingCard.php';
+                }
             }
-        }
-    ?>
+        ?>
+    </div>
+
+    <a 
+        class='header-navigation-link' 
+        <?php echo ($path===$routes['things']['route']) ? "data-current" : "" ?> 
+        href="<?php echo $routes['things']['route'] ?>"
+    >
+        all things
+    </a>
 </main>

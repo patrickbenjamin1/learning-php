@@ -53,7 +53,7 @@ function matchParams(string $testRoute, string $currentPath) {
             $matches;
             preg_match($paramTemplateRegex, $testRoutePart, $matches);
             $key=$matches[1];
-            $params += [$key => $currentPathParts[$index]];
+            $params += [$key => urldecode($currentPathParts[$index])];
         }
     }
 
@@ -63,6 +63,8 @@ function matchParams(string $testRoute, string $currentPath) {
 // render views for paths
 if (matches($routes['index']['template'], $path)) {
     include __DIR__.'/views/index.php';
+} else if (matches($routes['things']['template'], $path)) {
+    include __DIR__.'/views/things.php';
 } else if (matches($routes['thing']['template'], $path)) {
     include __DIR__.'/views/thing.php';
 } else {
