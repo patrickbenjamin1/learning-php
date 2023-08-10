@@ -19,4 +19,4 @@ if (!$thing) {
     <h1><?php echo $thing->name ?></h1>
 </div>  
 
-<script src="/thing.bundle.js"></script>
+<script src="/thing.bundle.js" defer></script>

@@ -44,6 +44,20 @@ const getHtmlForPath = async (path: string) => {
     return responseHtml;
 }
 
+/** slight hack to ensure scripts execute after page changes (scripts made using innerHTML = * don't execute) */
+const fixScripts = () => {
+    const entry = document.querySelector('main#entry');
+
+    entry.querySelectorAll('script').forEach(script => {
+        const newScript = document.createElement('script');
+        newScript.text = script.innerHTML;
+        for (let index = 0; index < script.attributes.length; index++){
+            newScript.setAttribute(script.attributes.item(index).name, script.attributes.item(index).value)
+        }
+        script.parentNode.replaceChild(newScript, script)
+    })
+}
+
 /** update the current html with the given */
 const updateRouter = async () => {
     const path = location.pathname;
@@ -56,6 +70,7 @@ const updateRouter = async () => {
     const html = await getHtmlForPath(path);
     
     entry.innerHTML = html;
+    fixScripts()
 }
 
 /** navigate to a new path */

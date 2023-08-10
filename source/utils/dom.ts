@@ -1,3 +1,4 @@
+/** add an event listener to the document that can listen for events on elements which didn't exist when this function was called */
 export const addRootEventListener = (selector: string, type: keyof HTMLElementEventMap, callback: (event: Event, element: Element) => void) => {
     // define event listener callback
     const eventListenerCallback = (
