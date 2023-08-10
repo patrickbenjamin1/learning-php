@@ -1,28 +1,22 @@
 <?php
-    // init
+// init
 
-    session_start();
+session_start();
 
-    // define globals
-    
-    $path = $_SERVER['REQUEST_URI'];
+$path = $_SERVER['REQUEST_URI'];
 
-    include __DIR__.'/repository/things.php';
-    include __DIR__.'/routes.php';
-?>
+// filepath to attempt to load file
+$filePath = __DIR__ . '/public' . $path;
 
-<head>
-    <?php require __DIR__.'/metadata.php' ?>
+// file exists in public path for request and is supported filetype, attempt to serve that file from www/ directory
+if (preg_match('/\/\w+(.css|.png|.jpg|.xml|.js)$/', $path) && file_exists($filePath)) {
+    include $filePath;
 
-    <style>
-        <?php include __DIR__.'/styles.css' ?>
-    </style>
-</head>
+    // if request path begins with /api/v1, serve the api
+} else if (preg_match('/ \/api\/v1\/\w+/', $path)) {
+    include __DIR__ . '/api/index.php';
 
-<body>    
-    <?php require __DIR__.'/components/header.php' ?>
-    
-    <?php require __DIR__.'/router.php' ?>
-
-    <?php require __DIR__.'/components/footer.php' ?>
-</body>
+    // otherwise serve the web
+} else {
+    include __DIR__ . '/www/index.php';
+}

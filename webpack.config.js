@@ -8,7 +8,7 @@ module.exports = {
     app: path.resolve(__dirname, "./source/app.js"),
   },
   output: {
-    path: path.resolve(__dirname, "./server"),
+    path: path.resolve(__dirname, "./server/public/"),
     filename: "[name].js",
   },
   plugins: [

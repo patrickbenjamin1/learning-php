@@ -2,6 +2,7 @@
 
 - php `brew install php`
 - asdf `brew install asdf`
+- apache anywhere (for local dev) `https://github.com/julianbrowne/apache-anywhere`
 
 # Start
 
