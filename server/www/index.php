@@ -13,10 +13,10 @@ include __DIR__ . '/routes.php';
     <script type="text/javascript" src="/app.bundle.js"></script>
 </head>
 
-<body>    
+<body>
     <?php require __DIR__ . '/components/header.php' ?>
     
-    <main>
+    <main id='entry'>
         <?php require __DIR__ . '/router.php' ?>
     </main>
 

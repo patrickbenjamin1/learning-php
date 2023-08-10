@@ -9,7 +9,7 @@ const views = fs.readdirSync(path.resolve(__dirname, "source/views"));
 module.exports = {
   mode: "development",
   entry: {
-    app: path.resolve(__dirname, "source/app.js"),
+    app: path.resolve(__dirname, "source/app.ts"),
     // reduce view entry points
     ...views.reduce(
       (output, viewFileName) => ({
@@ -27,6 +27,9 @@ module.exports = {
     path: path.resolve(__dirname, "server/public/"),
     filename: "[name].bundle.js",
   },
+  resolve: {
+    extensions: [".tsx", ".ts", ".js"],
+  },
   plugins: [
     new MiniCssExtractPlugin({
       filename: "styles.css",
@@ -37,6 +40,11 @@ module.exports = {
       {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, "css-loader"],
+      },
+      {
+        test: /\.tsx?$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
       },
     ],
   },
