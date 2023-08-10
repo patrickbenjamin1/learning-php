@@ -1,7 +1,8 @@
 <?php
 
 // include router utils
-include __DIR__ . '/../utils/router.php';
+include_once __DIR__ . '/../utils/router.php';
+include_once __DIR__ . '/routes.php';
 
 // render views for paths
 if (matches($routes['index']['template'], $request_path)) {

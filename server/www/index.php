@@ -1,7 +1,7 @@
 <?php
 // define globals
-include __DIR__ . '/../repositories/things.php';
-include __DIR__ . '/routes.php';
+include_once __DIR__ . '/../repositories/things.php';
+include_once __DIR__ . '/routes.php';
 
 // render HTML for page
 ?>

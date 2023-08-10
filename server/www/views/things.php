@@ -1,5 +1,7 @@
 <?php
 
+include_once __DIR__ . '/../../repositories/things.php';
+
 $things = getAllThings()
 
     ?>

@@ -1,4 +1,6 @@
 <?php
+include_once __DIR__ . '/../../repositories/things.php';
+
 // get thing id from path
 
 $params = getParamsFromRoute($routes['thing']['template'], $request_path);

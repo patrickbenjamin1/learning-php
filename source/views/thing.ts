@@ -9,6 +9,4 @@ const fetchThing = async () => {
     console.log(responseJson)
 }
 
-window.onload = () => {
-    fetchThing()
-}
+fetchThing()
