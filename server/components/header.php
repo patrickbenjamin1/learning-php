@@ -1,5 +1,5 @@
 <header class='header'>
-    <a class='header-logo' href="<?php $routes['index']['route'] ?>">
+    <a class='header-logo' href="<?php echo $routes['index']['route'] ?>">
         patrick's cool php website
     </a>
     <nav class='header-navigation'>
