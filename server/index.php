@@ -6,6 +6,7 @@
     // define globals
     
     $path = $_SERVER['REQUEST_URI'];
+    include __DIR__.'/routes.php';
 ?>
 
 <head>

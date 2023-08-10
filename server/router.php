@@ -42,7 +42,7 @@ function matches(string $testRoute, string $currentPath) {
 function matchParams(string $testRoute, string $currentPath) {
     global $paramTemplateRegex;
 
-    $params = array();
+    $params = [];
 
     // split    
     $testRouteParts = explode('/', $testRoute);
@@ -60,15 +60,12 @@ function matchParams(string $testRoute, string $currentPath) {
     return $params;
 }
 
-
 // render views for paths
-if (matches('/', $path)) {
+if (matches($routes['index']['template'], $path)) {
     include __DIR__.'/views/index.php';
-} else if (matches('/thing/[name]', $path)) {
+} else if (matches($routes['thing']['template'], $path)) {
     include __DIR__.'/views/thing.php';
 } else {
     http_response_code(404);
     include __DIR__.'/views/404.php';
 }
-
-?>

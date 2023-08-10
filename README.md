@@ -19,9 +19,6 @@ and in another
 
 # Plans
 
-- route match functions
-  - instead of regex, use like `if (matches($path, '/thing/[name]'))`
-  - inside view, use `$params = match($path, '/thing/[name]'); $name = $params->name`
 - set up an apache server, use this to serve locally
   - route all paths through index except
     - /api, _.css, _.js, and other filetypes i.e. images

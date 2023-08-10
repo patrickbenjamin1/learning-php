@@ -1,7 +1,7 @@
 <?php
     // get thing name from path
 
-    $params = matchParams('/thing/[name]', $path);
+    $params = matchParams($routes['thing']['template'], $path);
 
     $name=$params['name'] ?? null;
 ?>
