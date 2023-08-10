@@ -15,11 +15,11 @@ $publicPath = __DIR__ . '/public' . $request_path;
 if (preg_match('/\/[\.|\w]+(.css|.png|.jpg|.xml|.js)$/', $request_path) && file_exists($publicPath)) {
     include $publicPath;
 
-    // if request path begins with /api/v1, and Content-Type is JSON serve the api
+    // if request path begins with /api/v1
 } else if (preg_match('/^\/api\/v1\/\w+/', $request_path)) {
     include __DIR__ . '/api/index.php';
 
-    // if request path begins with /view, only serve the markup for that view (for routing without) bypassing the shell from index.php
+    // if request path begins with /view, bypass index.php and only render the content of that view
 } else if (preg_match('/^\/view/', $request_path)) {
     //remove /view from $request_path so the included router treats it as a normal route
     $request_path = substr($request_path, 5);

@@ -1,13 +1,13 @@
-const path = require("path");
-const fs = require("fs");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+import * as path from "path";
+import * as fs from "fs";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import * as webpack from 'webpack'
 
 // get all view entrypoints
 const views = fs.readdirSync(path.resolve(__dirname, "source/views"));
 
-/** @type {import('webpack').Configuration} */
-module.exports = {
-  mode: "development",
+const config: webpack.Configuration = {
+  mode: "production",
   entry: {
     app: path.resolve(__dirname, "source/app.ts"),
     // reduce view entry points
@@ -49,3 +49,5 @@ module.exports = {
     ],
   },
 };
+
+export default config;

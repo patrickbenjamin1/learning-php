@@ -42,6 +42,6 @@ There is also a JS bundle generated for each JS file in `source/views/`
 
 # Plans
 
+- connect to a prismic repository (https://github.com/prismicio-community/php-kit/blob/master/docs/02-query-the-api/01-how-to-query-the-api.md)
 - move routes to a json file shared between server code and frontend js
-- write a router that serves an initial view and the shell from the server based on the path, then a client side router that requests more markup as it moves between paths
 - set up and connect a database (postgres?)
