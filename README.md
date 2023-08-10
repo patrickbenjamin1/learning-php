@@ -18,6 +18,20 @@ and in another
 ./start.sh
 ```
 
+# Explanation
+
+This is a simple php server which serves a website and a rest api.
+
+The entrypoint for the server is `server/index.php` which routes to the following depending on the path
+
+- `server/www/index.php`
+- `server/api/index.php`
+- `server/public/*`
+
+JS and CSS can be found in `source/` which is bundled by `webpack` into `server/public`.
+
+There is also a JS bundle generated for each JS file in `source/views/`
+
 # Plans
 
 - set up an apache server, use this to serve locally

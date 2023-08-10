@@ -1,3 +1,9 @@
+<?php
+
+$things = getAllThings()
+
+    ?>
+
 <div class="view">
     <h1>all things</h1>
 

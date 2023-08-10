@@ -1,15 +1,31 @@
 const path = require("path");
+const fs = require("fs");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+// get all view entrypoints
+const views = fs.readdirSync(path.resolve(__dirname, "source/views"));
 
 /** @type {import('webpack').Configuration} */
 module.exports = {
   mode: "development",
   entry: {
-    app: path.resolve(__dirname, "./source/app.js"),
+    app: path.resolve(__dirname, "source/app.js"),
+    // reduce view entry points
+    ...views.reduce(
+      (output, viewFileName) => ({
+        ...output,
+        [viewFileName.split(".")[0]]: path.resolve(
+          __dirname,
+          "source/views",
+          viewFileName
+        ),
+      }),
+      {}
+    ),
   },
   output: {
-    path: path.resolve(__dirname, "./server/public/"),
-    filename: "[name].js",
+    path: path.resolve(__dirname, "server/public/"),
+    filename: "[name].bundle.js",
   },
   plugins: [
     new MiniCssExtractPlugin({

@@ -17,13 +17,13 @@ function matchesPart(string $testRoutePart, string $currentPathPart)
 }
 
 // check if a route matches the current path - route and path must start /
-function matches(string $testRoute, string $currentPath)
+function matches(string $testRoute, string $currentPath, bool $exact = true)
 {
     // split    
     $testRouteParts = explode('/', $testRoute);
     $currentPathParts = explode('/', $currentPath);
 
-    if (count($testRouteParts) !== count($currentPathParts)) {
+    if ($exact && count($testRouteParts) !== count($currentPathParts)) {
         return false;
     }
 
