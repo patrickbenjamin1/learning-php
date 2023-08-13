@@ -1,5 +1,5 @@
 import "./index.css";
-import { initialiseRouter } from "./utils/router";
+import { Router } from "./utils/router";
 
 // non-page specific js here
-initialiseRouter()
+Router.init()
