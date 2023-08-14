@@ -1,6 +1,7 @@
 # Prerequisites
 
 - php `brew install php`
+- composer `brew install composer`
 - asdf `brew install asdf`
 
 # Setup
@@ -10,6 +11,12 @@ from the root of this repo, run
 ```sh
 asdf install
 npm install
+```
+
+and from `server/` run
+
+```sh
+composer install
 ```
 
 # Start

@@ -1,13 +1,16 @@
 <?php
-
 include_once __DIR__ . '/../../repositories/things.php';
+include_once __DIR__ . '/../../repositories/prismic/home.php';
+include_once __DIR__ . '/../../repositories/prismic/stuff.php';
 
-$things = getAllThings()
+$things = getAllThings();
+$stuff = getAllStuff();
+$data = getHome();
 
-    ?>
+?>
 
 <div class="view">
-    <h1>home</h1>
+    <h1><?php echo $data->data->title ?></h1>
 
     <div class='things'>
         <?php
@@ -18,6 +21,18 @@ $things = getAllThings()
                 include __DIR__ . '/../components/thingCard.php';
             }
         }
+        ?>
+    </div>
+    
+    <div class='things'>
+        <?php
+
+        if (count($stuff->results)) {
+            foreach ($stuff->results as $stuffItem) {
+                include __DIR__ . '/../components/stuffCard.php';
+            }
+        }
+
         ?>
     </div>
 

@@ -11,7 +11,15 @@ $routes = [
         "template" => "/things"
     ],
     "thing" => [
-        "route" => function($id) { return "/things/".urlencode($id); },
+        "route" => function ($id) {
+            return "/things/" . urlencode($id);
+        },
         "template" => "/things/[id]"
+    ],
+    "stuff" => [
+        "route" => function ($uid) {
+            return "/stuff/" . urlencode($uid);
+        },
+        "template" => "/stuff/[uid]"
     ]
 ];
