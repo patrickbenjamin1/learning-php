@@ -4,7 +4,7 @@ include_once __DIR__ . '/../../repositories/prismic/stuff.php';
 
 // get stuff id from path
 
-$params = getParamsFromRoute($routes['stuff']['template'], $request_path);
+$params = getParamsFromRoute($routes['stuff']['template']);
 
 $uid = $params['uid'] ?? null;
 

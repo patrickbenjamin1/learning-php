@@ -17,11 +17,13 @@ function matchesPart(string $templatePart, string $currentPathPart)
 }
 
 // check if a route matches the current path - route and path must start /
-function matches(string $template, string $currentPath, bool $exact = true)
+function matches(string $template, bool $exact = true)
 {
+    global $requestPath;
+
     // split    
     $templateParts = explode('/', $template);
-    $currentPathParts = explode('/', $currentPath);
+    $currentPathParts = explode('/', $requestPath);
 
     if ($exact && count($templateParts) !== count($currentPathParts)) {
         return false;
@@ -41,15 +43,16 @@ function matches(string $template, string $currentPath, bool $exact = true)
 }
 
 // get an object containing the params from the current path matched against a route
-function getParamsFromRoute(string $template, string $currentPath)
+function getParamsFromRoute(string $template)
 {
+    global $requestPath;
     global $paramTemplateRegex;
 
     $params = [];
 
     // split    
     $templateParts = explode('/', $template);
-    $currentPathParts = explode('/', $currentPath);
+    $currentPathParts = explode('/', $requestPath);
 
     foreach ($templateParts as $index => $templatePart) {
         if (preg_match($paramTemplateRegex, $templatePart) === 1) {

@@ -1,7 +1,7 @@
 <?php
 // get thing id from path
 
-$params = getParamsFromRoute('/api/v1/things/[id]', $requestPath);
+$params = getParamsFromRoute('/api/v1/things/[id]');
 
 $id = $params['id'] ?? null;
 
