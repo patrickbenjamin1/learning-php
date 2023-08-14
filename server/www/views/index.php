@@ -9,7 +9,7 @@ $data = getHome();
 
 ?>
 
-<div class="view">
+<main class="view">
     <h1><?php echo $data->data->title ?></h1>
 
     <div class='things'>
@@ -24,7 +24,7 @@ $data = getHome();
         ?>
     </div>
     
-    <div class='things'>
+    <ul class='stuff'>
         <?php
 
         if (count($stuff->results)) {
@@ -34,7 +34,7 @@ $data = getHome();
         }
 
         ?>
-    </div>
+    </ul>
 
     <a 
         class='header-navigation-link' 
@@ -43,4 +43,6 @@ $data = getHome();
     >
         all things
     </a>
-        </div>
+</main>
+
+<?php include __DIR__ . '/../components/footer.php' ?>

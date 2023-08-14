@@ -10,4 +10,7 @@ html {
     --grey-dark: #373737;
 
     --accent: blue;
+
+    --timing-quick: 150ms;
+    --timing-slow: 600ms;
 }

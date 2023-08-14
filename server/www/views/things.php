@@ -6,7 +6,7 @@ $things = getAllThings()
 
     ?>
 
-<div class="view">
+<main class="view">
     <h1>all things</h1>
 
     <div class='things'>
@@ -18,4 +18,6 @@ $things = getAllThings()
         }
         ?>
     </div>
-</div>
+    </main>
+
+<?php include __DIR__ . '/../components/footer.php' ?>

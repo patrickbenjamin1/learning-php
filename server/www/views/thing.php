@@ -15,8 +15,9 @@ if (!$thing) {
 }
 ?>
 
-<div class="view">
+<main class="view">
     <h1><?php echo $thing->name ?></h1>
-</div>  
+</main>  
 
+<?php include __DIR__ . '/../components/footer.php' ?>
 <script src="/thing.bundle.js" defer></script>

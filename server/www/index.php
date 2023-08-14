@@ -8,7 +8,7 @@ include_once __DIR__ . '/routes.php';
 if ($isViewRequest) {
     include __DIR__ . '/router.php';
     return;
-} 
+}
 
 ?>
 
@@ -22,9 +22,7 @@ if ($isViewRequest) {
 <body>
     <?php include __DIR__ . '/components/header.php' ?>
     
-    <main id='entry'>
+    <div id='root'>
         <?php include __DIR__ . '/router.php' ?>
-    </main>
-
-    <?php include __DIR__ . '/components/footer.php' ?>
+    </div>
 </body>
