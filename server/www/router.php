@@ -5,11 +5,11 @@ include_once __DIR__ . '/../utils/router.php';
 include_once __DIR__ . '/routes.php';
 
 // render views for paths
-if (matches($routes['index']['template'], $request_path)) {
+if (matches($routes['index']['template'], $requestPath)) {
     include __DIR__ . '/views/index.php';
-} else if (matches($routes['things']['template'], $request_path)) {
+} else if (matches($routes['things']['template'], $requestPath)) {
     include __DIR__ . '/views/things.php';
-} else if (matches($routes['thing']['template'], $request_path)) {
+} else if (matches($routes['thing']['template'], $requestPath)) {
     include __DIR__ . '/views/thing.php';
 } else if (matches($routes['stuff']['template'], $request_path)) {
     include __DIR__ . '/views/stuff.php';

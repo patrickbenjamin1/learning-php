@@ -5,7 +5,7 @@
     <nav class='header-navigation'>
         <a 
             class='header-navigation-link' 
-            <?php echo ($request_path === $routes['things']['route']) ? "data-current" : "" ?> 
+            <?php echo ($requestPath === $routes['things']['route']) ? "data-current" : "" ?> 
             href="<?php echo $routes['things']['route'] ?>"
         >
             things
