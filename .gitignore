@@ -1,4 +1,5 @@
-/server/public/*.bundle.js
-/server/public/styles.css
+/server/public/**/*
+!/server/public/index.php
 /server/vendor
 node_modules
+.env
