@@ -38,6 +38,13 @@ class Request
     public array $body;
 
     /**
+     * The query of the request.
+     *
+     * @var array
+     */
+    public array $query;
+
+    /**
      * The time the request was made.
      *
      * @var int
@@ -55,13 +62,14 @@ class Request
      * @param array $body The body of the request.
      * @param int $request_time The time the request was made.
      */
-    public function __construct(string $method, string $path, array $headers, array $body, int $request_time = 0)
+    public function __construct(string $method, string $path, array $headers, ?array $body, int $request_time, ?array $query)
     {
         $this->method = $method;
         $this->path = $path;
         $this->headers = $headers;
-        $this->body = $body;
+        $this->body = $body ?? [];
         $this->request_time = $request_time;
+        $this->query = $query ?? [];
     }
 
     /**
@@ -80,24 +88,36 @@ class Request
     public static function parseBody()
     {
         $body = file_get_contents('php://input');
-        $parsedBody = [];
-        parse_str($body, $parsedBody);
+        $parsedBody = json_decode($body, true);
         return $parsedBody;
     }
 
     /**
-     * Parses the current HTTP request and returns a new Request object.
+     *  Parses the query of the current HTTP request and returns an array.
+     */
+    public static function parseQuery()
+    {
+        $query = $_SERVER['QUERY_STRING'] ?? '';
+        $parsedQuery = [];
+        parse_str($query, $parsedQuery);
+        return $parsedQuery;
+    }
+
+    /**
+     * Parses the current HTTP request from globals and returns a new Request object.
      *
      * @return Request The parsed Request object.
      */
     public static function parse()
     {
         $method = strtoupper($_SERVER['REQUEST_METHOD']);
-        $path = strtolower($_SERVER['REQUEST_URI']);
+        $parsed_url = parse_url($_SERVER['REQUEST_URI']);
+        $path = $parsed_url['path'];
         $headers = getallheaders();
         $body = Request::parseBody();
+        $query = Request::parseQuery();
         $request_time = $_SERVER['REQUEST_TIME'];
 
-        return new Request($method, $path, $headers, $body, $request_time);
+        return new Request($method, $path, $headers, $body, $request_time, $query);
     }
 }

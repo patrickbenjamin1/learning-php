@@ -140,19 +140,6 @@ class Router
     }
 
     /**
-     * Redirect a URL to another URL
-     * @param string $from_url in the syntax /part/:param
-     * @param string $to_url
-     */
-    public function redirect(string $from_url, string $to_url, $exact = true, bool $continue = false)
-    {
-        $this->path($from_url, function () use ($to_url) {
-            header('Location: ' . $to_url);
-            exit();
-        }, $exact, $continue);
-    }
-
-    /**
      * Include a file if the URL matches
      * @param string $url in the syntax /part/:param
      * @param string $file

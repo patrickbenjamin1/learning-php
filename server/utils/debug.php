@@ -6,13 +6,15 @@ namespace Utils;
 
 class Debug
 {
+    /** dump a value */
     static function dump(mixed $value)
     {
         echo '<pre>';
         var_dump($value);
         echo '</pre>';
     }
-    /** dump and die a value */
+
+    /** dump a value and die */
     static function dd(mixed $value)
     {
         Debug::dump($value);

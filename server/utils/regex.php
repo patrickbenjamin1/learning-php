@@ -17,4 +17,9 @@ class Regex
     {
         return preg_match($pattern, $subject) === 1;
     }
+
+    public static function replace(string $pattern, string $replacement, string $subject): string
+    {
+        return preg_replace($pattern, $replacement, $subject);
+    }
 }

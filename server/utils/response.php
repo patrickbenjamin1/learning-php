@@ -11,12 +11,20 @@ class Response
         http_response_code($status);
         header('Content-Type: application/json');
         echo json_encode($data);
+        exit;
     }
 
     public static function sendError(string $message, int $status = 500): void
     {
-        self::send([
-            'error' => $message
+        Response::send([
+            'message' => $message,
+            'status' => $status
         ], $status);
+    }
+
+    public static function redirect(string $url): void
+    {
+        header('Location: ' . $url);
+        Response::send(null, 302);
     }
 }

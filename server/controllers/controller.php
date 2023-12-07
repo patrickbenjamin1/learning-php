@@ -10,22 +10,27 @@ abstract class Controller
     {
         throw new \Exceptions\NotImplemented('GET not implemented');
     }
+
     public static function post(\Utils\Request $request)
     {
         throw new \Exceptions\NotImplemented('POST not implemented');
     }
+
     public static function put(\Utils\Request $request)
     {
         throw new \Exceptions\NotImplemented('PUT not implemented');
     }
+
     public static function delete(\Utils\Request $request)
     {
         throw new \Exceptions\NotImplemented('\DELETE not implemented');
     }
+
     public static function patch(\Utils\Request $request)
     {
         throw new \Exceptions\NotImplemented('PATCH not implemented');
     }
+
     public static function handleRequest(\Utils\Request $request)
     {
         switch ($request->method) {
