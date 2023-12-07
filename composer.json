@@ -7,6 +7,9 @@
     "start": "php -S localhost:8000 ./server/index.php"
   },
   "config": {
-    "process-timeout": 0
+    "process-timeout": 0,
+    "platform": {
+      "php": "8.2.12"
+    }
   }
 }

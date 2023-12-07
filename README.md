@@ -31,9 +31,3 @@ composer start
 ```
 
 this starts the php dev server.
-
-# Plans
-
-- connect to a prismic repository (https://github.com/prismicio-community/php-kit/blob/master/docs/02-query-the-api/01-how-to-query-the-api.md)
-- move routes to a json file shared between server code and frontend js
-- set up and connect a database (postgres?)

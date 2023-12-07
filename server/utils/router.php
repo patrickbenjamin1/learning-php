@@ -2,17 +2,16 @@
 
 namespace Utils;
 
-class Router {
+class Router
+{
     /** used to ensure only one route is matched at a time */
-    public static bool $matched = false;
+    public bool $matched = false;
 
-    public static \Utils\Request $request;
+    public \Utils\Request $request;
 
-    /**
-     * Initialise the router, parsing the request
-     */
-    public static function init() {
-        Router::$request = \Utils\Request::parse();
+    public function __construct()
+    {
+        $this->request = \Utils\Request::parse();
     }
 
     /** 
@@ -20,9 +19,10 @@ class Router {
      * @param string $url in the syntax /part/:param
      * @param bool $exact Whether to match the whole URL or just the start
      */
-    private static function urlMatches(string $url, bool $exact = true): bool|array {
+    private function urlMatches(string $url, bool $exact = true): bool|array
+    {
         // if url matches exactly, sweet go for it
-        if (Router::$request->path === $url){
+        if ($this->request->path === $url) {
             return true;
         }
 
@@ -32,7 +32,7 @@ class Router {
         }
 
         // if exact set to false, check if the request uri starts with the url
-        if (!$exact && str_starts_with(Router::$request->path, $url)) {
+        if (!$exact && str_starts_with($this->request->path, $url)) {
             return true;
         }
 
@@ -42,7 +42,7 @@ class Router {
         $url_parts = \Utils\Regex::getMatches($pattern, $url);
 
         // split request url into parts
-        $request_url_parts = \Utils\Regex::getMatches($pattern, Router::$request->path);
+        $request_url_parts = \Utils\Regex::getMatches($pattern, $this->request->path);
 
         if (
             count($url_parts) > 0 && count($request_url_parts) > 0 &&
@@ -59,7 +59,7 @@ class Router {
                 }
             }
 
-            Router::$request->applyParams($params);
+            $this->request->applyParams($params);
 
             return $params;
         }
@@ -67,8 +67,9 @@ class Router {
         return false;
     }
 
-    private static function urlMatchesRegex(string $pattern): bool {
-        return \Utils\Regex::match($pattern, Router::$request->path);
+    private function urlMatchesRegex(string $pattern): bool
+    {
+        return \Utils\Regex::match($pattern, $this->request->path);
     }
 
     /**
@@ -76,11 +77,12 @@ class Router {
      * @param string $pattern
      * @param callable $callback
      */
-    public static function regex (string $pattern, callable $callback) {
-        if (Router::urlMatchesRegex($pattern)) {
-            Router::$matched = true;
+    public function regex(string $pattern, callable $callback)
+    {
+        if ($this->urlMatchesRegex($pattern)) {
+            $this->matched = true;
 
-            $callback(Router::$request);
+            $callback($this->request);
         }
     }
 
@@ -89,11 +91,12 @@ class Router {
      * @param string $url in the syntax /part/:param
      * @param callable $callback
      */
-    public static function path(string $url, callable $callback, $exact = true) {
-        if (Router::urlMatches($url, $exact) && !Router::$matched) {
-            Router::$matched = true;
+    public function path(string $url, callable $callback, $exact = true)
+    {
+        if ($this->urlMatches($url, $exact) && !$this->matched) {
+            $this->matched = true;
 
-            $callback(Router::$request);
+            $callback($this->request);
         }
     }
 
@@ -102,9 +105,10 @@ class Router {
      * @param string $url in the syntax /part/:param
      * @param \Controllers\Controller $controller
      */
-    public static function controller(string $url, \Controllers\Controller $controller, $exact = true) {
-        Router::path($url, function() use ($controller) {
-            $controller::handleRequest(Router::$request);
+    public function controller(string $url, \Controllers\Controller $controller, $exact = true)
+    {
+        $this->path($url, function () use ($controller) {
+            $controller::handleRequest($this->request);
         }, $exact);
     }
 
@@ -113,8 +117,9 @@ class Router {
      * @param string $from_url in the syntax /part/:param
      * @param string $to_url
      */
-    public static function redirect(string $from_url, string $to_url, $exact = true) {
-        Router::path($from_url, function() use ($to_url) {
+    public function redirect(string $from_url, string $to_url, $exact = true)
+    {
+        $this->path($from_url, function () use ($to_url) {
             header('Location: ' . $to_url);
             exit();
         }, $exact);
