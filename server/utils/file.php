@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Utils;
 
-class File {
-    public static function serve (string $path) {
-        $fullPath = __DIR__.'/../'.$path;
+class File
+{
+    public static function serve(string $path)
+    {
+        $fullPath = __DIR__ . '/../' . $path;
 
         if (file_exists($fullPath)) {
             header('Content-Type: ' . File::getMimeType($fullPath));
@@ -36,17 +40,20 @@ class File {
         'svgz' => 'image/svg+xml',
     ];
 
-    public static function getFileRegex () {
+    public static function getFileRegex()
+    {
         $mimeTypesKeys = array_keys(File::$mimeTypes);
         $regexPattern = implode('|', $mimeTypesKeys);
         return '/\.(' . $regexPattern . ')$/i';
     }
 
-    public static function getExtension($path) {
+    public static function getExtension($path)
+    {
         return pathinfo($path, PATHINFO_EXTENSION);
     }
 
-    public static function getMimeType($path) {
+    public static function getMimeType($path)
+    {
         $extension = File::getExtension($path);
         return File::$mimeTypes[$extension] ?? mime_content_type($path);
     }

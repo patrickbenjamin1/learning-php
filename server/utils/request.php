@@ -52,7 +52,8 @@ class Request
      * @param string $method The HTTP method of the request.
      * @param string $path The URI of the request.
      * @param array $headers The headers of the request.
-     * @param string $body The body of the request.
+     * @param array $body The body of the request.
+     * @param int $request_time The time the request was made.
      */
     public function __construct(string $method, string $path, array $headers, array $body, int $request_time = 0)
     {

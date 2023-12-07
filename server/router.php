@@ -24,5 +24,5 @@ $router->regex(File::getFileRegex(), function (Request $request) {
 // serve 404 if none of the above match
 $router->path('*', function () {
     http_response_code(404);
-    return Template::view('404');
+    Template::view('404');
 });

@@ -1,7 +1,8 @@
 <?php
 
-namespace Utils;
+declare(strict_types=1);
 
+namespace Utils;
 
 class Router
 {
@@ -13,10 +14,15 @@ class Router
 
     private \Utils\Request $request;
 
-    public function __construct(array|null $params = null)
+    /**
+     * Create a new router
+     * @param array{matchOne?: bool} $params
+     */
+    public function __construct(?array $params = null)
     {
         $this->request = \Utils\Request::parse();
-        $this->matchOne = $params?->matchOne ?? true;
+
+        $this->matchOne = $params['matchOne'] ?? true;
     }
 
     /** 
@@ -72,11 +78,18 @@ class Router
         return false;
     }
 
-    private function urlMatchesRegex(string $pattern): bool
+    /** 
+     * Check if the request url matches a given regex, and return any named parameters
+     * @param string $pattern in the syntax /part/:param
+     */
+    private function pathMatchesRegex(string $pattern): bool
     {
         return \Utils\Regex::match($pattern, $this->request->path);
     }
 
+    /** 
+     * Check if a URL is allowed to match
+     */
     private function shouldMatch(): bool
     {
         return $this->matchOne && !$this->matched;
@@ -87,10 +100,12 @@ class Router
      * @param string $pattern
      * @param callable $callback
      */
-    public function regex(string $pattern, callable $callback)
+    public function regex(string $pattern, callable $callback, bool $continue = false)
     {
-        if ($this->urlMatchesRegex($pattern) && $this->shouldMatch()) {
-            $this->matched = true;
+        if ($this->pathMatchesRegex($pattern) && $this->shouldMatch()) {
+            if (!$continue) {
+                $this->matched = true;
+            }
 
             $callback($this->request);
         }
@@ -101,10 +116,12 @@ class Router
      * @param string $url in the syntax /part/:param
      * @param callable $callback
      */
-    public function path(string $url, callable $callback, $exact = true)
+    public function path(string $url, callable $callback, $exact = true, bool $continue = false)
     {
         if ($this->urlMatchesPath($url, $exact) && $this->shouldMatch()) {
-            $this->matched = true;
+            if (!$continue) {
+                $this->matched = true;
+            }
 
             $callback($this->request);
         }
@@ -115,11 +132,11 @@ class Router
      * @param string $url in the syntax /part/:param
      * @param \Controllers\Controller $controller
      */
-    public function controller(string $url, \Controllers\Controller $controller, $exact = true)
+    public function controller(string $url, \Controllers\Controller $controller, $exact = true, bool $continue = false)
     {
         $this->path($url, function () use ($controller) {
             $controller::handleRequest($this->request);
-        }, $exact);
+        }, $exact, $continue);
     }
 
     /**
@@ -127,12 +144,12 @@ class Router
      * @param string $from_url in the syntax /part/:param
      * @param string $to_url
      */
-    public function redirect(string $from_url, string $to_url, $exact = true)
+    public function redirect(string $from_url, string $to_url, $exact = true, bool $continue = false)
     {
         $this->path($from_url, function () use ($to_url) {
             header('Location: ' . $to_url);
             exit();
-        }, $exact);
+        }, $exact, $continue);
     }
 
     /**
@@ -140,11 +157,11 @@ class Router
      * @param string $url in the syntax /part/:param
      * @param string $file
      */
-    public function include(string $url, string $file, $exact = true)
+    public function include(string $url, string $file, $exact = true, bool $continue = false)
     {
         $this->path($url, function () use ($file) {
             include $file;
             exit();
-        }, $exact);
+        }, $exact, $continue);
     }
 }

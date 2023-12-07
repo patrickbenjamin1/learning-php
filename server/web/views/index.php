@@ -1,11 +1,13 @@
-<?php declare(strict_types=1); ?>
+<?php
+
+declare(strict_types=1); ?>
 
 <?php Utils\Template::partial('head', ['title' => 'Home']) ?>
-    <?php Utils\Template::partial('header') ?>
+<?php Utils\Template::partial('header') ?>
 
-    <main id="root">
-        <p>Hello</p>
+<main id="root">
+    <p>Hello</p>
 
-        <a href="/things">Things</a>
-    </main>
+    <a href="/things">Things</a>
+</main>
 <?php Utils\Template::partial('foot') ?>

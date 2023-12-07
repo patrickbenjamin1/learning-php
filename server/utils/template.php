@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Utils;
 
 /**
@@ -7,7 +9,8 @@ namespace Utils;
  * 
  * This class provides utility methods for rendering templates in PHP.
  */
-class Template {
+class Template
+{
     /**
      * Render a template file with optional data.
      * 
@@ -15,11 +18,12 @@ class Template {
      * @param array $data An associative array of data to be passed to the template.
      * @throws \Exception If the template file does not exist.
      */
-    static function render(string $path, ?array $data = []) {
-        $path;
+    static function render(string $path, ?array $data = [])
+    {
         if (!file_exists($path)) {
             throw new \Exception("Template not found: $path");
         }
+
         extract($data);
         require $path;
     }
@@ -31,8 +35,9 @@ class Template {
      * @param array $data An associative array of data to be passed to the partial template.
      * @return void
      */
-    public static function partial (string $partialPath, ?array $data = []) {
-        return Template::render(__DIR__ . "/../web/partials/$partialPath.php", $data);
+    public static function partial(string $partialPath, ?array $data = [])
+    {
+        Template::render(__DIR__ . "/../web/partials/$partialPath.php", $data);
     }
 
     /**
@@ -42,7 +47,8 @@ class Template {
      * @param array $data An associative array of data to be passed to the view template.
      * @return void
      */
-    public static function view (string $viewPath, ?array $data = []) {
-        return Template::render(__DIR__ . "/../web/views/$viewPath.php", $data);
+    public static function view(string $viewPath, ?array $data = [])
+    {
+        Template::render(__DIR__ . "/../web/views/$viewPath.php", $data);
     }
 }
