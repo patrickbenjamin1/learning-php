@@ -42,12 +42,20 @@ export namespace Router {
       return pageCache[path];
     }
 
-    const response = await fetch(`/view${path}`);
+    const response = await fetch(path);
     const responseHtml = await response.text();
 
     pageCache[path] = responseHtml;
 
-    return responseHtml;
+    const newDocument = new DOMParser().parseFromString(
+      responseHtml,
+      "text/html"
+    );
+    const content = newDocument.querySelector("#root").innerHTML;
+
+    console.log(content);
+
+    return content;
   };
 
   /** slight hack to ensure scripts execute after page changes (scripts made using innerHTML = * don't execute) */
@@ -73,7 +81,7 @@ export namespace Router {
     const path = location.pathname;
 
     // get root element
-    const root = document.querySelector("div#root");
+    const root = document.querySelector("#root");
 
     // start transition with data attribute triggering CSS rules
     root.setAttribute("data-transitioning-out", "true");

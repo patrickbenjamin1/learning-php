@@ -4,7 +4,5 @@
 @import './styles/colours.css';
 @import './styles/viewTransitions.css';
 
-/* components */
-@import './components/header.css';
-@import './components/footer.css';
-@import './components/thingCard.css';
+/* partials */
+@import './partials/header.css';

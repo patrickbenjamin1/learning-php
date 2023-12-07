@@ -1,4 +1,7 @@
+# built files
 /server/public/*.bundle.js
 /server/public/styles.css
-/server/vendor
+
+# managed dependencies
+vendor 
 node_modules
