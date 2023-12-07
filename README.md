@@ -11,11 +11,6 @@ from the root of this repo, run
 ```sh
 asdf install
 npm install
-```
-
-and from `server/` run
-
-```sh
 composer install
 ```
 
@@ -24,28 +19,18 @@ composer install
 in one terminal instance at the root of this repo, run
 
 ```sh
-./serve.sh
+npm start
 ```
+
+this starts the js/scss bundler.
 
 and in another
 
 ```sh
-./start.sh
+composer start
 ```
 
-# Explanation
-
-This is a simple php server which serves a website and a rest api.
-
-The entrypoint for the server is `server/index.php` which routes to the following depending on the composition of the path
-
-- `server/api/index.php` - if it starts `/api/v1`
-- `server/public/*` - if it ends with a filetype and exists in the public directory
-- `server/www/index.php` - everything else
-
-JS and CSS can be found in `source/` which is bundled by `webpack` into `server/public` then imported into `php`
-
-There is also a JS bundle generated for each JS file in `source/views/`
+this starts the php dev server.
 
 # Plans
 
