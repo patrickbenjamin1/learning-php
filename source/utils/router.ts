@@ -45,15 +45,14 @@ export namespace Router {
     const response = await fetch(path);
     const responseHtml = await response.text();
 
-    pageCache[path] = responseHtml;
-
     const newDocument = new DOMParser().parseFromString(
       responseHtml,
       "text/html"
     );
+
     const content = newDocument.querySelector("#root").innerHTML;
 
-    console.log(content);
+    pageCache[path] = content;
 
     return content;
   };

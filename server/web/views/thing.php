@@ -4,6 +4,6 @@
     <?php Utils\Template::partial('header') ?>
 
     <main id="root">
-        <p>This is a test <?= $thingId ?></p>
+        <p>This is a thing: <?= $thingId ?></p>
     </main>
 <?php Utils\Template::partial('foot') ?>

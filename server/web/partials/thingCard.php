@@ -2,6 +2,6 @@
 
 <a href="/thing/<?= $thingId ?>">
     <div class="thing">
-        <h2><?= $thingId ?></h2>
+        <div>thing <?= $thingId ?></div>
     </div>
 </a>
