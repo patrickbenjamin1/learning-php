@@ -19,7 +19,7 @@ class Router
      * @param string $url in the syntax /part/:param
      * @param bool $exact Whether to match the whole URL or just the start
      */
-    private function urlMatches(string $url, bool $exact = true): bool|array
+    private function urlMatchesPath(string $url, bool $exact = true): bool|array
     {
         // if url matches exactly, sweet go for it
         if ($this->request->path === $url) {
@@ -50,7 +50,7 @@ class Router
         ) {
             $params = [];
 
-            for ($i = 1; $i < count($url_parts); $i++) {
+            for ($i = 0; $i < count($url_parts); $i++) {
                 if (strpos($url_parts[$i], ':') === 0) {
                     $key = substr($url_parts[$i], 1);
                     $params[$key] = $request_url_parts[$i];
@@ -93,7 +93,7 @@ class Router
      */
     public function path(string $url, callable $callback, $exact = true)
     {
-        if ($this->urlMatches($url, $exact) && !$this->matched) {
+        if ($this->urlMatchesPath($url, $exact) && !$this->matched) {
             $this->matched = true;
 
             $callback($this->request);
@@ -121,6 +121,19 @@ class Router
     {
         $this->path($from_url, function () use ($to_url) {
             header('Location: ' . $to_url);
+            exit();
+        }, $exact);
+    }
+
+    /**
+     * Include a file if the URL matches
+     * @param string $url in the syntax /part/:param
+     * @param string $file
+     */
+    public function include(string $url, string $file, $exact = true)
+    {
+        $this->path($url, function () use ($file) {
+            include $file;
             exit();
         }, $exact);
     }

@@ -1,11 +1,14 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Utils;
 
 /**
  * Represents an HTTP request.
  */
-class Request {
+class Request
+{
     /**
      * The HTTP method of the request.
      *
@@ -51,7 +54,8 @@ class Request {
      * @param array $headers The headers of the request.
      * @param string $body The body of the request.
      */
-    public function __construct(string $method, string $path, array $headers, array $body, int $request_time = 0) {
+    public function __construct(string $method, string $path, array $headers, array $body, int $request_time = 0)
+    {
         $this->method = $method;
         $this->path = $path;
         $this->headers = $headers;
@@ -62,7 +66,8 @@ class Request {
     /**
      * Get parameters from the URL
      */
-    public function applyParams(array $params) {
+    public function applyParams(array $params)
+    {
         if ($params) {
             $this->params = $params;
         }
@@ -71,7 +76,8 @@ class Request {
     /**
      * Parses the body of the current HTTP request and returns an array.
      */
-    public static function parseBody () {
+    public static function parseBody()
+    {
         $body = file_get_contents('php://input');
         $parsedBody = [];
         parse_str($body, $parsedBody);
@@ -83,7 +89,8 @@ class Request {
      *
      * @return Request The parsed Request object.
      */
-    public static function parse() {
+    public static function parse()
+    {
         $method = strtoupper($_SERVER['REQUEST_METHOD']);
         $path = strtolower($_SERVER['REQUEST_URI']);
         $headers = getallheaders();
