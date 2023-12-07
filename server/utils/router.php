@@ -2,16 +2,21 @@
 
 namespace Utils;
 
+
 class Router
 {
-    /** used to ensure only one route is matched at a time */
-    public bool $matched = false;
+    /** should this router only match once then move on? */
+    private bool $matchOne = true;
 
-    public \Utils\Request $request;
+    /** used to ensure only one route is matched by each router at a time */
+    private bool $matched = false;
 
-    public function __construct()
+    private \Utils\Request $request;
+
+    public function __construct(array|null $params = null)
     {
         $this->request = \Utils\Request::parse();
+        $this->matchOne = $params?->matchOne ?? true;
     }
 
     /** 
@@ -72,6 +77,11 @@ class Router
         return \Utils\Regex::match($pattern, $this->request->path);
     }
 
+    private function shouldMatch(): bool
+    {
+        return $this->matchOne && !$this->matched;
+    }
+
     /**
      * Route a URL to a callback using regex
      * @param string $pattern
@@ -79,7 +89,7 @@ class Router
      */
     public function regex(string $pattern, callable $callback)
     {
-        if ($this->urlMatchesRegex($pattern)) {
+        if ($this->urlMatchesRegex($pattern) && $this->shouldMatch()) {
             $this->matched = true;
 
             $callback($this->request);
@@ -93,7 +103,7 @@ class Router
      */
     public function path(string $url, callable $callback, $exact = true)
     {
-        if ($this->urlMatchesPath($url, $exact) && !$this->matched) {
+        if ($this->urlMatchesPath($url, $exact) && $this->shouldMatch()) {
             $this->matched = true;
 
             $callback($this->request);
